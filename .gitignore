@@ -20,3 +20,6 @@ nbdist/
 nbactions.xml
 nb-configuration.xml
 .nb-gradle/
+
+### Test files ###
+*.torrent

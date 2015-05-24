@@ -1,8 +1,6 @@
 package goncalojoaocorreia.kickass.api;
 
 import goncalojoaocorreia.kickass.api.categories.Category;
-import goncalojoaocorreia.kickass.api.categories.Games;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -47,17 +45,6 @@ public class Search {
 
 	private boolean addTorrent(Torrent t) {
 		return result.add(t);
-	}
-
-	public static void main(String[] args) throws Exception {
-		Search s = Search.newSearch("avengers", Games.ALL);
-		List<Torrent> res = s.result;
-		System.out.println("Found " + res.size() + " torrents:");
-		for (Torrent re : res) {
-			System.out.println(re.title());
-		}
-		File f = res.get(0).download("TESTERINO");
-		System.out.println(f.getAbsolutePath());
 	}
 
 	private static Search runSearch(URL url) throws IOException {
