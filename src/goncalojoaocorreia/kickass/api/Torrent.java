@@ -152,6 +152,13 @@ public class Torrent {
 		return f;
 	}
 
+	@Override
+	public String toString() {
+		return String.
+			format("Title: %s\n\tURL: %s\n\tCategory: %s\n\tSeeders: %d\n\tLeeches: %d\n",
+				   this.title, this.torrentUrl, this.category, this.seeders, this.leeches);
+	}
+
 	/**
 	 * Takes a torrent age in a format such as '2 weeks' and transforms it to a
 	 * numeric value for comparison purposes.
