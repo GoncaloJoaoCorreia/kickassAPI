@@ -47,6 +47,10 @@ public class Search {
 		return result.add(t);
 	}
 
+	public List<Torrent> searchResults() {
+		return this.result;
+	}
+
 	private static Search runSearch(URL url) throws IOException {
 		Document doc = Jsoup.parse(url, timeout);
 		Search search = new Search();
@@ -138,7 +142,7 @@ public class Search {
 	}
 
 	/**
-	 * Sets the timeout used in the parsing methods. Default value is 1000.
+	 * Sets the timeout used by the parsing methods. Default value is 1000.
 	 *
 	 * @param t Time in milliseconds
 	 */
