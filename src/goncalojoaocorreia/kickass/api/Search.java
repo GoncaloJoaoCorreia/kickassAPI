@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -15,7 +14,7 @@ import org.jsoup.select.Elements;
  * This class represents a search for torrents. Use the static methods to create
  * new searches.
  */
-public class Search {
+public class Search extends ArrayList<Torrent> {
 
 	private static final String SEARCH_URL = "https://kat.cr/usearch/";
 	private static final String CATEGORY_SEARCH = " category:";
@@ -37,18 +36,8 @@ public class Search {
 		SMALLEST_FIRST, LARGEST_FIRST, OLDEST_FIRST, YOUNGEST_FIRST, MOST_SEEDERS, LEAST_SEEDERS, MOST_LEECHES, LEAST_LEECHES
 	}
 
-	private List<Torrent> result;
-
 	private Search() {
-		this.result = new ArrayList<>();
-	}
-
-	private boolean addTorrent(Torrent t) {
-		return result.add(t);
-	}
-
-	public List<Torrent> searchResults() {
-		return this.result;
+		super();
 	}
 
 	private static Search runSearch(URL url) throws IOException {
@@ -74,7 +63,7 @@ public class Search {
 
 			String category = torrent.select("span[id]").get(0).text();
 
-			search.result.
+			search.
 				add(new Torrent(download, title, category, age, seeds, leech, size));
 		}
 		return search;
