@@ -9,6 +9,12 @@ Compile the source or download the .jar binary directly and add it to your class
 ## Usage
 
 ``` Java
+import goncalojoaocorreia.kickass.api.Search;
+import goncalojoaocorreia.kickass.api.Search.SortOption;
+import goncalojoaocorreia.kickass.api.Torrent;
+import goncalojoaocorreia.kickass.api.categories.Movies;
+
+
 //Find the first 25 results of 'avengers 1080p' search
 Search.newSearch("avengers 1080p");
 
