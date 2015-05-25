@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -36,12 +37,20 @@ public class Search extends ArrayList<Torrent> {
 		SMALLEST_FIRST, LARGEST_FIRST, OLDEST_FIRST, YOUNGEST_FIRST, MOST_SEEDERS, LEAST_SEEDERS, MOST_LEECHES, LEAST_LEECHES
 	}
 
+	//TODO: .next() method to iterate through pages
+	//Store search url in object when doing newSearch()
 	private Search() {
 		super();
 	}
 
 	private static Search runSearch(URL url) throws IOException {
-		Document doc = Jsoup.parse(url, timeout);
+		Document doc;
+		try {
+			doc = Jsoup.parse(url, timeout);
+		} catch (HttpStatusException ex) {
+			//404 error means no torrents found in search, so we return an empty list
+			return new Search();
+		}
 		Search search = new Search();
 
 		Elements torrents = doc.select("tr").not(".firstr");
