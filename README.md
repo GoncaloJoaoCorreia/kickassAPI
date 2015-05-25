@@ -5,6 +5,7 @@ An unofficial Java API for kickass.to partially inspired by https://github.com/f
 ## How to get it working
 
 Compile the source or download the .jar binary directly and add it to your classpath.
+You need the [jsoup binaries](http://jsoup.org/download) in your classpath to compile the source.
 
 ## Usage
 
