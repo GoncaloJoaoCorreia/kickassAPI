@@ -37,7 +37,7 @@ s.page(5);//Gets the 5th page of 'game of thrones' search
 for (Torrent torrent : Search.newSearch("avengers")) {
 	System.out.println(torrent);
 	
-	//Download selected torrent to 'kickass/torrents' folder
+	//Download .torrent file to 'kickass/torrents' folder
 	torrent.download("kickass/torrents");
 
 	//Get various information about selected torrent
