@@ -152,6 +152,11 @@ public class Torrent {
 		return f;
 	}
 
+	/**
+	 * Returns a String containing basic info about the torrent.
+	 *
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return String.
@@ -221,7 +226,7 @@ public class Torrent {
 			case "KB":
 				sizeParsed *= 1000;
 				break;
-			//TODO: Find out what's the byte string representation in the website
+			//TODO: Find out what's the byte string representation in kat
 		}
 
 		return (long) sizeParsed;

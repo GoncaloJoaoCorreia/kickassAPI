@@ -36,13 +36,20 @@ public class Search extends ArrayList<Torrent> {
 	private int currentPage;
 	private final int pageCount;
 
+	/**
+	 * This documents available sorting methods for a search.
+	 */
 	public enum SortOption {
 
 		SMALLEST_FIRST, LARGEST_FIRST, OLDEST_FIRST, YOUNGEST_FIRST, MOST_SEEDERS, LEAST_SEEDERS, MOST_LEECHES, LEAST_LEECHES
 	}
 
-	//TODO: .next() method to iterate through pages
-	//Store search url in object when doing newSearch()
+	/**
+	 * Gets the next 25 results of the search.
+	 *
+	 * @return Empty search if no more results exist
+	 * @throws IOException
+	 */
 	public Search next() throws IOException {
 		if (currentPage < pageCount) {
 			this.currentPage++;
@@ -53,6 +60,13 @@ public class Search extends ArrayList<Torrent> {
 		}
 	}
 
+	/**
+	 * Gets a page from the results
+	 *
+	 * @param pageNumber The wanted result page
+	 * @return up to 25 results if page exists, empty otherwise
+	 * @throws IOException
+	 */
 	public Search page(int pageNumber) throws IOException {
 		if (currentPage < pageCount && pageNumber > 0) {
 			this.currentPage = pageNumber;
@@ -63,6 +77,13 @@ public class Search extends ArrayList<Torrent> {
 		}
 	}
 
+	/**
+	 * Creates a new search
+	 *
+	 * @param query String to search
+	 * @return Up to 25 torrents, or empty if search yields no results
+	 * @throws IOException
+	 */
 	public static Search newSearch(String query) throws IOException {
 		String urlStr = SEARCH_URL + URLEncoder.encode(query, "UTF-8");
 		URL url = new URL(urlStr);
@@ -70,6 +91,14 @@ public class Search extends ArrayList<Torrent> {
 		return Search.runSearch(url);
 	}
 
+	/**
+	 * Creates a new search
+	 *
+	 * @param query String to search
+	 * @param category Restrict the search to this category
+	 * @return Up to 25 torrents, or empty if search yields no results
+	 * @throws IOException
+	 */
 	public static Search newSearch(String query, Category category) throws IOException {
 		String urlStr = SEARCH_URL + URLEncoder.
 			encode(query + CATEGORY_SEARCH + category.url(), "UTF-8");
@@ -78,6 +107,14 @@ public class Search extends ArrayList<Torrent> {
 		return Search.runSearch(url);
 	}
 
+	/**
+	 * Creates a new search
+	 *
+	 * @param query String to search
+	 * @param sort {@link SortOption} used to sort the results
+	 * @return Up to 25 torrents, or empty if search yields no results
+	 * @throws IOException
+	 */
 	public static Search newSearch(String query, SortOption sort) throws IOException {
 		String urlStr = SEARCH_URL + URLEncoder.
 			encode(query + getSortQuery(sort), "UTF-8");
@@ -85,6 +122,15 @@ public class Search extends ArrayList<Torrent> {
 		return Search.runSearch(url);
 	}
 
+	/**
+	 * Creates a new search
+	 *
+	 * @param query String to search
+	 * @param category Restrict the search to this category
+	 * @param sort {@link SortOption} used to sort the results
+	 * @return Up to 25 torrents, or empty if search yields no results
+	 * @throws IOException
+	 */
 	public static Search newSearch(String query, Category category,
 								   SortOption sort) throws IOException {
 		String urlStr = SEARCH_URL + URLEncoder.
