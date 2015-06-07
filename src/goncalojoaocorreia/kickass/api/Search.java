@@ -196,7 +196,10 @@ public class Search extends ArrayList<Torrent> {
 			return new Search();
 		}
 		Elements pages = doc.select("a.turnoverButton.siteButton.bigButton");
-		int maxPages = Integer.parseInt(pages.get(pages.size() - 1).text());
+		int maxPages = 0;
+		if(!pages.isEmpty()){
+			maxPages = Integer.parseInt(pages.get(pages.size() - 1).text());
+		}
 
 		Search search = new Search(url.toString(), maxPages);
 
