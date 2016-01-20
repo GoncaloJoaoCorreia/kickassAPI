@@ -18,6 +18,7 @@ public class Torrent {
     private final int leeches;
     private final long size;
     private final boolean verified;
+    private final String magnet;
 
     /**
      * Constructor for Torrent object.
@@ -30,9 +31,10 @@ public class Torrent {
      * @param leeches Amount of leeches
      * @param size Size (in bytes)
      * @param verified whether the torrent is verified or not
+     * @param magnet Magnet link
      */
     public Torrent(URL torrentUrl, String title, String category, long age,
-            int seeders, int leeches, long size, boolean verified) {
+            int seeders, int leeches, long size, boolean verified, String magnet) {
         this.torrentUrl = torrentUrl;
         this.title = title;
         this.category = category;
@@ -41,6 +43,7 @@ public class Torrent {
         this.leeches = leeches;
         this.size = size;
         this.verified = verified;
+        this.magnet = magnet;
     }
 
     /**
@@ -53,9 +56,10 @@ public class Torrent {
      * @param seeders Amount of seeders
      * @param leeches Amount of leeches
      * @param size Size (in bytes)
+     * @param magnet Magnet link
      */
     public Torrent(URL torrentUrl, String title, String category, long age,
-            int seeders, int leeches, long size) {
+            int seeders, int leeches, long size, String magnet) {
         this.torrentUrl = torrentUrl;
         this.title = title;
         this.category = category;
@@ -64,6 +68,7 @@ public class Torrent {
         this.leeches = leeches;
         this.size = size;
         this.verified = true;
+        this.magnet = magnet;
     }
 
     /**
@@ -121,10 +126,9 @@ public class Torrent {
     }
 
     /**
-     * Gets the torrent size in a human readable format.
-     * Source:
+     * Gets the torrent size in a human readable format. Source:
      * https://stackoverflow.com/questions/3758606/how-to-convert-byte-size-into-human-readable-format-in-java
-     * 
+     *
      * @param si True to use SI units, false to use binary units.
      * @return torrent size in a human readable format.
      */
@@ -145,6 +149,15 @@ public class Torrent {
      */
     public boolean isVerified() {
         return this.verified;
+    }
+
+    /**
+     * Returns the torrent's magnet link.
+     *
+     * @return A string containing the torrent's magnet link
+     */
+    public String magnetLink() {
+        return this.magnet;
     }
 
     /**

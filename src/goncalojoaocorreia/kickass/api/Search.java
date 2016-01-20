@@ -19,7 +19,7 @@ import org.jsoup.select.Elements;
  */
 public class Search extends ArrayList<Torrent> {
 
-    private static final String SEARCH_URL = "https://kat.cr/usearch/";
+    private static final String SEARCH_URL = "http://kat.cr/usearch/";
     private static final String CATEGORY_SEARCH = " category:";
     private static final String ORDER_SIZE_DESC = "/?field=size&sorder=desc";
     private static final String ORDER_SIZE_ASC = "/?field=size&sorder=asc";
@@ -31,8 +31,9 @@ public class Search extends ArrayList<Torrent> {
     private static final String ORDER_LEECH_ASC = "/?field=leechers&sorder=asc";
 
     private static final String TORRENT_DOWNLOAD = "[title=Download torrent file]";
+    private static final String MAGNET_LINK = "[title=Torrent magnet link]";
 
-    private static int timeout = 1000;
+    private static int timeout = 3000;
 
     private String searchURL;
     private int currentPage;
@@ -211,6 +212,7 @@ public class Search extends ArrayList<Torrent> {
         for (Element torrent : torrents.subList(1, torrents.size())) {
             String urlDownload = torrent.select(TORRENT_DOWNLOAD).get(0).
                     getAllElements().get(0).attr("href");
+            String magnet = torrent.select(MAGNET_LINK).get(0).getAllElements().get(0).attr("href");
             Pattern p = Pattern.compile("http:.*");
             Matcher m = p.matcher(urlDownload);
             if(!m.find()){
@@ -220,7 +222,7 @@ public class Search extends ArrayList<Torrent> {
 
             String title = torrent.select("a.cellMainLink").get(0).text();
 
-			//TODO: Check if verified
+            //TODO: Check if verified
             //Select info table cells
             Elements info = torrent.select("td.center");
             long size = Torrent.parseSize(info.get(0).text());
@@ -231,7 +233,7 @@ public class Search extends ArrayList<Torrent> {
             String category = torrent.select("span[id]").get(0).text();
 
             search.
-                    add(new Torrent(download, title, category, age, seeds, leech, size));
+                    add(new Torrent(download, title, category, age, seeds, leech, size, magnet));
         }
         return search;
     }
