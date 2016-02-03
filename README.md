@@ -2,6 +2,8 @@
 
 An unofficial Java API for kickass.to partially inspired by https://github.com/fm4d/KickassAPI
 
+**Warning** this API is currently broken due to a change in the SSL certificate. A fix is being worked on.
+
 ## How to get it working
 
 Compile the source or [download the latest .jar binary](https://github.com/GoncaloJoaoCorreia/kickassAPI/releases/latest) directly and add it to your classpath.
